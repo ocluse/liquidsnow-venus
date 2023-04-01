@@ -1,0 +1,115 @@
+@typeparam T
+@inherits InputBase<T> 
+@implements IDropdown
+
+<div class="dropdown @_dropdownClass"  @onclick="Clicked" @onclick:stopPropagation=true>
+    <div class="select-selected @_selectSelectedClass">
+        @if (Value != null)
+        {
+            @if (ItemTemplate == null)
+            {
+                <TextBlock>@Value</TextBlock>
+            }
+            else
+            {
+                @ItemTemplate(Value)
+            }
+        }
+    </div>
+    <div class="select-items @_showClass">
+        @if (Items != null)
+        {
+            @foreach (var item in Items)
+            {
+                <div class="option" @onclick="()=>ItemClicked(item)">
+                    @if (ItemTemplate == null)
+                    {
+                        <TextBlock>@item</TextBlock>
+                    }
+                    else
+                    {
+                        @ItemTemplate(item)
+                    }
+                </div>
+            }
+        }
+    </div>
+    <span class="floating-label @(Value!=null?"pushed":"")">@Header</span>
+</div>
+@code {
+    //[Parameter]
+    //public EventCallback<TItem?> SelectedChanged { get; set; }
+
+    [Parameter]
+    public IEnumerable<T>? Items { get; set; }
+
+    [Parameter]
+    public RenderFragment<T>? ItemTemplate { get; set; }
+
+    [CascadingParameter]
+    public IDropdownLayout? Layout { get; set; }
+
+    List<string> _items = new() { "Shalom", "Tumaini", "Ebenezer", "Zion" };
+    private bool _show;
+    private string _showClass = "select-hide";
+    private string _dropdownClass = "";
+    private string? _selectSelectedClass;
+
+
+    protected override void OnInitialized()
+    {
+        if(Layout != null)
+        {
+            Layout.Clicked += OnLayoutClicked;
+            Layout.DropdownClicked += OnDropdownClicked;
+        }
+    }
+
+    private void OnLayoutClicked()
+    {
+        SetState(false);
+    }
+
+    private void OnDropdownClicked(IDropdown dropdown)
+    {
+        if (dropdown != this)
+        {
+            SetState(false);
+        }
+    }
+
+    private async Task ItemClicked(T item)
+    {
+        ChangeEventArgs args = new() { Value = item };
+        await OnChange(args);
+    }
+
+    private void Clicked()
+    {
+        SetState(!_show);
+        Layout?.OnDropdownClicked(this);
+    }
+
+    protected void SetState(bool state)
+    {
+        InvokeAsync(() =>
+       {
+           _show = state;
+           _dropdownClass = _show ? "active" : "";
+           _showClass = _show ? "" : "select-hide";
+           _selectSelectedClass = _show ? "select-arrow-active" : "";
+           StateHasChanged();
+       });
+    }
+
+    protected override void BuildInputClass(List<string> classList)
+    {
+        base.BuildInputClass(classList);
+        classList.Add("dropdown");
+    }
+
+    protected override T? GetValue(object? value)
+    {
+        return (T?)value;
+    }
+}
