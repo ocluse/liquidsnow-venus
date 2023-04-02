@@ -1,4 +1,10 @@
-﻿namespace Ocluse.LiquidSnow.Venus.Blazor
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Ocluse.LiquidSnow.Venus
 {
     public struct ValidationResult
     {
