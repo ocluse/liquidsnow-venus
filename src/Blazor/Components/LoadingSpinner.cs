@@ -15,6 +15,7 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
             builder.OpenElement(0, "div");
             builder.AddAttribute(1, "class", GetClass());
             builder.AddAttribute(2, "style", GetStyle());
+            builder.CloseElement();
         }
     }
 }
