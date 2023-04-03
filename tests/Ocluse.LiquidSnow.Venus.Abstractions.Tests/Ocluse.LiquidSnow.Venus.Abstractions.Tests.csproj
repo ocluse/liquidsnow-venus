@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Abstractions\Ocluse.LiquidSnow.Venus.Abstractions.csproj" />
+    <ProjectReference Include="..\..\src\Abstractions\Ocluse.LiquidSnow.Venus.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>
