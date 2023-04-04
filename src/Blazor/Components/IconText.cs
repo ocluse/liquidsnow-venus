@@ -16,7 +16,7 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
         public int? IconColor { get; set; }
 
         [Parameter]
-        public int TextStyle { get; set; } = Blazor.TextStyle.Body;
+        public int TextStyle { get; set; } = Venus.TextStyle.Body;
 
         [Parameter]
         public RenderFragment? ChildContent { get; set; }

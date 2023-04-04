@@ -1,9 +1,14 @@
 ﻿using Ocluse.LiquidSnow.Core.Extensions;
 
-namespace Ocluse.LiquidSnow.Venus.Blazor.Services.Internal
+namespace Ocluse.LiquidSnow.Venus.Services.Internal
 {
     internal class VenusResolver : IVenusResolver
     {
+        public string ResolveAvatarId(string userId)
+        {
+            return $"https://cdn.ocluse.com/krystal/avatars/{userId}";
+        }
+
         public string ResolveColor(int color)
         {
 
@@ -47,7 +52,7 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Services.Internal
                 TextHierarchy.Span => nameof(TextHierarchy.Span).ToLower(),
                 TextHierarchy.P => nameof(TextHierarchy.P).ToLower(),
                 TextHierarchy.DFN => nameof(TextHierarchy.DFN).ToLower(),
-                _=>throw new NotImplementedException()
+                _ => throw new NotImplementedException()
             };
         }
 

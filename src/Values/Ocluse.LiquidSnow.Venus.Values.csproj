@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -9,15 +9,22 @@
 	<Version>0.0.5</Version>
 	<Authors>Ocluse</Authors>
 	<PackageOutputPath>..\..\build</PackageOutputPath>
-	<Description>Utilities for quickly bootsrapping UI for frameworks supported under Ocluse's Venus design patterns.</Description>
+	<Description>Constants and values for use with Venus libraries.</Description>
 	<PackageIcon>logo.png</PackageIcon>
 	<RepositoryUrl>https://github.com/ocluse/liquidsnow-venus</RepositoryUrl>
 	<Copyright>© Ocluse</Copyright>
   </PropertyGroup>
-	<ItemGroup>
+<ItemGroup>
 		<None Include="..\..\logo.png">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
+	</ItemGroup>	
+  <ItemGroup>
+    <ProjectReference Include="..\Abstractions\Ocluse.LiquidSnow.Venus.Abstractions.csproj" />
+  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+		<PackageReference Include="Ocluse.LiquidSnow.Core" Version="0.1.2" />
 	</ItemGroup>
 </Project>

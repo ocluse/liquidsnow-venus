@@ -1,4 +1,4 @@
-﻿namespace Ocluse.LiquidSnow.Venus.Blazor;
+﻿namespace Ocluse.LiquidSnow.Venus;
 
 public class Icons
 {

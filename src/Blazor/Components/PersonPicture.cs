@@ -14,6 +14,9 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
         [Parameter]
         public int Size { get; set; } = DefaultSize.Size48;
 
+        [Parameter]
+        public string? SrcOnError { get; set; } = "/images/anonymous.svg";
+
         protected override void BuildClass(List<string> classList)
         {
             base.BuildClass(classList);
@@ -24,12 +27,12 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
         {
             builder.OpenElement(0, "img");
 
-            string src = UserId == null ? $"https://cdn.ocluse.com/krystal/avatars/{UserId}" : Src;
+            string src =  string.IsNullOrEmpty(UserId) ? Src : VenusResolver.ResolveAvatarId(UserId);
 
             builder.AddAttribute(1, "src", src);
             builder.AddAttribute(2, "height", Size);
             builder.AddAttribute(2, "width", Size);
-            builder.AddAttribute(3, "onerror", "this.src ='/images/anonymous.svg';this.onerror=''");
+            builder.AddAttribute(3, "onerror", $"this.src ='{SrcOnError}';this.onerror=''");
             builder.AddAttribute(4, "class", GetClass());
             builder.CloseElement();
         }

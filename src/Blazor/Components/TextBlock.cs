@@ -6,7 +6,7 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
     public class TextBlock : ControlBase
     {
         [Parameter]
-        public int TextStyle { get; set; } = Blazor.TextStyle.Body;
+        public int TextStyle { get; set; } = Venus.TextStyle.Body;
 
         [Parameter]
         public int Hierarchy { get; set; } = TextHierarchy.Span;

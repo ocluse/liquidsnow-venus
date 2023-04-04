@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<Version>0.0.3</Version>
+	<Version>0.0.5</Version>
 	<Authors>Ocluse</Authors>
 	<PackageOutputPath>..\..\build</PackageOutputPath>
 	<Description>Utilities for quickly bootsrapping UI for Blazor using Ocluse's Venus design patterns.</Description>
@@ -32,6 +32,8 @@
 	
   <ItemGroup>
     <ProjectReference Include="..\Abstractions\Ocluse.LiquidSnow.Venus.Abstractions.csproj" />
+    <ProjectReference Include="..\Icons\Ocluse.LiquidSnow.Venus.Icons.csproj" />
+    <ProjectReference Include="..\Values\Ocluse.LiquidSnow.Venus.Values.csproj" />
   </ItemGroup>
 
 </Project>

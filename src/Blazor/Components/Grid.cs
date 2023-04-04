@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ocluse.LiquidSnow.Venus.Blazor.Components
 {
-    public class Grid : ControlBase
+    public class Grid : ControlBase, IGrid
     {
         [Parameter]
         public int Columns { get; set; } = 1;
@@ -67,42 +67,7 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
         protected override void BuildStyle(List<string> styleList)
         {
             base.BuildStyle(styleList);
-
-            styleList.Add($"--grid-columns:{TranslateToGridTemplate(Columns)}");
-
-            //Lg:
-            int lg = ColumnsLg ?? Columns;
-            styleList.Add($"--grid-columns-lg: {TranslateToGridTemplate(lg)}");
-
-            //Md:
-            int md = ColumnsMd ?? lg;
-            styleList.Add($"--grid-columns-md: {TranslateToGridTemplate(md)}");
-
-            //Sm:
-            int sm = ColumnsSm ?? md;
-            styleList.Add($"--grid-columns-sm: {TranslateToGridTemplate(sm)}");
-
-            //Xs:
-            int xs = ColumnsXs ?? sm;
-            styleList.Add($"--grid-columns-xs: {TranslateToGridTemplate(xs)}");
-
-            //Column Gap
-            int columnGap = ColumnGap ?? Gap;
-            styleList.Add($"--grid-column-gap: {columnGap / 2}rem");
-
-            //Row Gap
-            int rowGap = RowGap ?? Gap;
-            styleList.Add($"--grid-row-gap: {rowGap / 2}rem;");
-        }
-
-        private static string TranslateToGridTemplate(int columns)
-        {
-            StringBuilder sb = new();
-            for (int i = 0; i < columns; i++)
-            {
-                sb.Append("1fr ");
-            }
-            return sb.ToString().Trim();
+            styleList.AddRange(this.GetGridStyles());
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Ocluse.LiquidSnow.Venus
+﻿namespace Ocluse.LiquidSnow.Venus
 {
     public interface IValidator<T>
     {
