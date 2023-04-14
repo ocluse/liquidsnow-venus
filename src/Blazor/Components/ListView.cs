@@ -7,7 +7,7 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components;
 public class ListView<T> : ControlBase
 {
     [Inject]
-    public IBlazorContainerStateResolver ContainerStateResolver { get; } = null!;
+    public IBlazorContainerStateResolver ContainerStateResolver { get; set; } = null!;
 
     [Parameter]
     public RenderFragment<T>? ItemTemplate { get; set; }
