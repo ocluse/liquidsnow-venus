@@ -16,14 +16,4 @@
         Week,
         Tel
     }
-
-    public enum ContainerState
-    {
-        Loading,
-        NotFound,
-        Error,
-        Unauthorized,
-        Found,
-        ReauthenticationRequired
-    }
 }
