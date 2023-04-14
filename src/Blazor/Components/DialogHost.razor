@@ -15,7 +15,7 @@
                                 <h3 class="dialog-header">@_dialogHeader</h3>
                                 @if (_showClose)
                                 {
-                                    <IconButton Icon="@Icons.Feather.X" OnClick="()=>CloseDialog()"/>
+                                    <IconButton Icon="@Icons.Feather.X" OnClick="()=>CloseDialog()" />
                                 }
                             </div>
                         }
@@ -83,11 +83,22 @@
     public void CloseDialog(bool? isSuccess = null, object? data = null)
     {
         DialogResult result = new()
-        {
-            Data = data,
-            Success = isSuccess
-        };
+            {
+                Data = data,
+                Success = isSuccess
+            };
 
         _tcsDialog?.SetResult(result);
+    }
+
+    public void ShowLoading(string loadingMessage = "Loading...")
+    {
+        _loadingMessage = loadingMessage;
+        _showLoading = true;
+    }
+
+    public void HideLoading()
+    {
+        _showLoading = false;
     }
 }

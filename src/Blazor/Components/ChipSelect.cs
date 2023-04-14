@@ -30,20 +30,19 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
             {
                 foreach (T item in Items)
                 {
+                    if (item == null)
+                    {
+                        throw new InvalidOperationException("Cannot represent null values");
+                    }
                     builder.OpenElement(2, "div");
                     builder.AddAttribute(3, "class", item.Equals(Value) ? "option active" : "option");
                     builder.AddAttribute(4, "onclick", () => OnClick(item));
                     if (ItemTemplate == null)
                     {
                         builder.AddAttribute(5, "style", "padding: 1rem;");
-                        //builder.AddContent(5, item.ToString());
                         builder.OpenElement(6, "div");
                         builder.AddContent(7, item.ToString());
                         builder.CloseElement();
-                        //builder.OpenComponent<TextBlock>(5);
-                        //builder.AddAttribute(6, "Margin", "2");
-                        //builder.AddAttribute(7, nameof(TextBlock.ChildContent), RenderFragment.Create item);
-                        //builder.CloseComponent();
                     }
                     else
                     {
