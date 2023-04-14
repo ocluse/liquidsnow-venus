@@ -1,30 +1,34 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Ocluse.LiquidSnow.Venus.Blazor.Services;
-using Ocluse.LiquidSnow.Venus.Blazor.Services.Internal;
+using Ocluse.LiquidSnow.Venus.Blazor.Services.Implementations;
 using Ocluse.LiquidSnow.Venus.Services;
+using System.Runtime.InteropServices;
 
 namespace Ocluse.LiquidSnow.Venus.Blazor
 {
     public static class ConfigureServices
     {
-        public static IServiceCollection AddVenusComponents(this IServiceCollection services)
+        public static VenusServiceBuilder AddComponents(this VenusServiceBuilder builder)
         {
-            return services
-                .AddComponentServices()
-                .AddVenusValues();
+            return builder.AddComponents<BlazorContainerStateResolver>();
         }
 
-        public static IServiceCollection AddVenusComponents<T>(this IServiceCollection services) where T : class, IVenusResolver
+        public static VenusServiceBuilder AddComponents<T>(this VenusServiceBuilder builder)
+            where T: class, IBlazorContainerStateResolver
         {
-            
-            return services
-                .AddComponentServices()
-                .AddVenusValues<T>();
+            builder.Services.RemoveAll(typeof(IDialogService));
+            builder.Services.AddSingleton<IDialogService, DialogService>();
+            builder.Services.RemoveAll(typeof(IBlazorContainerStateResolver));
+            builder.Services.AddSingleton<IBlazorContainerStateResolver, T>();
+
+            return builder;
         }
 
-        private static IServiceCollection AddComponentServices(this IServiceCollection services)
+        public static VenusServiceBuilder AddVenusComponents(this IServiceCollection services)
         {
-            return services.AddSingleton<IDialogService, DialogService>();
+            return services.AddVenus()
+                .AddComponents();
         }
     }
 }

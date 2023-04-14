@@ -6,5 +6,6 @@
         public string ResolveTextStyle(int textStyle);
         public string ResolveTextHierarchy(int textHierarchy);
         public string ResolveAvatarId(string userId);
+        public int ResolveExceptionToContainerState(Exception exception);
     }
 }

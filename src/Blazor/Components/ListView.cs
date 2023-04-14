@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
+using Ocluse.LiquidSnow.Venus.Blazor.Services;
 
 namespace Ocluse.LiquidSnow.Venus.Blazor.Components;
 
 public class ListView<T> : ControlBase
 {
+    [Inject]
+    public IBlazorContainerStateResolver ContainerStateResolver { get; } = null!;
+
     [Parameter]
     public RenderFragment<T>? ItemTemplate { get; set; }
     
@@ -16,6 +20,9 @@ public class ListView<T> : ControlBase
 
     [Parameter]
     public string? ItemClass { get; set; }
+
+    [Parameter]
+    public int State { get; set; }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
@@ -45,18 +52,27 @@ public class ListView<T> : ControlBase
                 if (ItemTemplate == null)
                 {
                     builder.OpenComponent<TextBlock>(2);
-                    builder.AddAttribute(2, "ChildContent", item);
-                    builder.AddAttribute(2, "Class", itemClass);
+                    builder.SetKey(item);
+                    builder.AddAttribute(3, nameof(TextBlock.ChildContent), item);
+                    builder.AddAttribute(4, nameof(TextBlock.Class), itemClass);
                     builder.CloseComponent();
                 }
                 else
                 {
-                    builder.OpenElement(2, "div");
-                    builder.AddAttribute(2, "class", itemClass);
-                    builder.AddContent(3, ItemTemplate, item);
+                    builder.OpenElement(5, "div");
+                    builder.SetKey(item);
+                    builder.AddAttribute(6, "class", itemClass);
+                    builder.AddContent(7, ItemTemplate, item);
                     builder.CloseElement();
                 }
+               
             }
+        }
+        else
+        {
+            Type typeToRender = ContainerStateResolver.Resolve(State);
+            builder.OpenComponent(8, typeToRender);
+            builder.CloseComponent();
         }
     }
 
@@ -74,8 +90,20 @@ public class ListView<T> : ControlBase
     {
         if (Fetch != null)
         {
-            Items = await Fetch.Invoke();
-            await InvokeAsync(() => StateHasChanged());
+            State = ContainerState.Loading;
+
+            try
+            {
+                Items = await Fetch.Invoke();
+            }
+            catch (Exception ex)
+            {
+                State = VenusResolver.ResolveExceptionToContainerState(ex);
+            }
+            finally
+            {
+                await InvokeAsync(StateHasChanged);
+            }
         }
     }
 }

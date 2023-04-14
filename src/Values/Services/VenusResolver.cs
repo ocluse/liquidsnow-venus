@@ -39,6 +39,27 @@ namespace Ocluse.LiquidSnow.Venus.Services
             return $"var(--color-{colorStr}";
         }
 
+        public int ResolveExceptionToContainerState(Exception exception)
+        {
+            if (exception is UnauthorizedAccessException)
+            {
+                return ContainerState.Unauthorized;
+            }
+            else if (exception is HttpRequestException ex)
+            {
+                if (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    return ContainerState.NotFound;
+                }
+                else if (ex.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    return ContainerState.Unauthorized;
+                }
+                
+            }
+            return ContainerState.Error;
+        }
+
         public string ResolveTextHierarchy(int textHierarchy)
         {
             return textHierarchy switch

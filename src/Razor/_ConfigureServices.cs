@@ -6,21 +6,10 @@ namespace Ocluse.LiquidSnow.Venus.Razor
 {
     public static class ConfigureServices
     {
-        public static IServiceCollection AddVenusRazor(this IServiceCollection services)
+        public static VenusServiceBuilder AddRazor(this VenusServiceBuilder builder)
         {
-            return services.AddLocalServices()
-                .AddVenusValues();
-        }
-
-        public static IServiceCollection AddVenusRazor<T>(this IServiceCollection services) where T : class, IVenusResolver
-        {
-            return services.AddLocalServices()
-                .AddVenusValues<T>();
-        }
-
-        public static IServiceCollection AddLocalServices(this IServiceCollection services)
-        {
-            return services;
+            //TODO: Add local services;
+            return builder;
         }
     }
 }

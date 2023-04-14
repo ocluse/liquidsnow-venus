@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
+using Ocluse.LiquidSnow.Venus.Blazor.Services;
 
 namespace Ocluse.LiquidSnow.Venus.Blazor.Components
 {
     public class ItemContainer<T> : ControlBase
     {
-        private ContainerState _state;
+        [Inject]
+        public IBlazorContainerStateResolver ContainerStateResolver { get; } = null!;
 
         [EditorRequired]
         [Parameter]
@@ -17,19 +19,19 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
         [Parameter]
         public Func<Task<T>>? Fetch { get; set; }
 
+        [Parameter]
+        public int State { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
-            if (Fetch != null)
-            {
-                await ReloadData();
-            }
+            await ReloadData();
         }
 
         public async Task ReloadData()
         {
             if (Fetch != null)
             {
-                _state = ContainerState.Loading;
+                State = ContainerState.Loading;
 
                 try
                 {
@@ -37,11 +39,11 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
                 }
                 catch (Exception ex)
                 {
-                    //_state = ex.GetContainerState();
+                    State = VenusResolver.ResolveExceptionToContainerState(ex);
                 }
                 finally
                 {
-                    await InvokeAsync(() => StateHasChanged());
+                    await InvokeAsync(StateHasChanged);
                 }
             }
         }
@@ -51,6 +53,12 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
             if(Item != null)
             {
                 builder.AddContent(0, ChildContent, Item);
+            }
+            else
+            {
+                Type typeToRender = ContainerStateResolver.Resolve(State);
+                builder.OpenComponent(1, typeToRender);
+                builder.CloseComponent();
             }
         }
     }

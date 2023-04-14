@@ -1,12 +1,13 @@
 ﻿namespace Ocluse.LiquidSnow.Venus
 {
-    public class ContainerState
+    public static class ContainerState
     {
-        public static int Loading { get; } = 1;
-        public static int NotFound { get; } = 2;
-        public static int Error { get; } = 3;
-        public static int Unauthorized { get; } = 4;
-        public static int Found { get; } = 5;
-        public static int ReauthenticationRequired { get; } = 6;
+        public const int Loading  = 1;
+        public const int NotFound  = 2;
+        public const int Empty = 3;
+        public const int Error = 4;
+        public const int Unauthorized = 5;
+        public const int Found = 6;
+        public const int ReauthenticationRequired = 7;
     }
 }

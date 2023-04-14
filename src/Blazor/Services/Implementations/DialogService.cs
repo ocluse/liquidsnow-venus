@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Ocluse.LiquidSnow.Venus.Blazor.Components;
 
-namespace Ocluse.LiquidSnow.Venus.Blazor.Services.Internal
+namespace Ocluse.LiquidSnow.Venus.Blazor.Services.Implementations
 {
     internal class DialogService : IDialogService
     {
@@ -17,9 +17,9 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Services.Internal
             return ShowDialog(type, dialogHeader, allowDismiss, showClose, parameters);
         }
 
-        public Task<DialogResult> ShowDialog(Type dialogType, string? dialogHeader = null,  bool allowDismiss = false, bool showClose = true, Dictionary<string, object>? parameters = null)
+        public Task<DialogResult> ShowDialog(Type dialogType, string? dialogHeader = null, bool allowDismiss = false, bool showClose = true, Dictionary<string, object>? parameters = null)
         {
-            if(_host == null)
+            if (_host == null)
             {
                 throw new InvalidOperationException("No Dialog Host has been set");
             }

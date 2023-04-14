@@ -5,14 +5,10 @@ namespace Ocluse.LiquidSnow.Venus
 {
     public static class ConfigureServices
     {
-        public static IServiceCollection AddVenusValues(this IServiceCollection services)
+        public static VenusServiceBuilder AddVenus(this IServiceCollection services)
         {
-            return services.AddVenusValues<VenusResolver>();
-        }
-
-        public static IServiceCollection AddVenusValues<T>(this IServiceCollection services) where T : class, IVenusResolver
-        {
-            return services.AddSingleton<IVenusResolver, T>();
+            VenusServiceBuilder builder = new(services);
+            return builder.AddResolver<VenusResolver>();
         }
     }
 }
