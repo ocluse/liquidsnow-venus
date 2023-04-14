@@ -1,8 +1,8 @@
 ﻿using Ocluse.LiquidSnow.Core.Extensions;
 
-namespace Ocluse.LiquidSnow.Venus.Services.Internal
+namespace Ocluse.LiquidSnow.Venus.Services
 {
-    internal class VenusResolver : IVenusResolver
+    public class VenusResolver : IVenusResolver
     {
         public string ResolveAvatarId(string userId)
         {
