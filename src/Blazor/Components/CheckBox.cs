@@ -10,6 +10,7 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
 {
     public class CheckBox : InputBase<bool>
     {
+        [Parameter]
         public RenderFragment? ChildContent { get; set; }
         protected override void BuildInputClass(List<string> classList)
         {

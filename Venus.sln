@@ -9,11 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocluse.LiquidSnow.Venus.Abs
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocluse.LiquidSnow.Venus.Abstractions.Tests", "tests\Ocluse.LiquidSnow.Venus.Abstractions.Tests\Ocluse.LiquidSnow.Venus.Abstractions.Tests.csproj", "{A1D8B03B-E350-4DEC-B268-610F5E5A132A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocluse.LiquidSnow.Venus.Icons", "src\Icons\Ocluse.LiquidSnow.Venus.Icons.csproj", "{FFBFA970-7192-426C-9FD9-E089437C2335}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocluse.LiquidSnow.Venus.Icons", "src\Icons\Ocluse.LiquidSnow.Venus.Icons.csproj", "{FFBFA970-7192-426C-9FD9-E089437C2335}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocluse.LiquidSnow.Venus.Razor", "src\Razor\Ocluse.LiquidSnow.Venus.Razor.csproj", "{E42E917D-0073-4572-8455-2EEFE6822A15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocluse.LiquidSnow.Venus.Razor", "src\Razor\Ocluse.LiquidSnow.Venus.Razor.csproj", "{E42E917D-0073-4572-8455-2EEFE6822A15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocluse.LiquidSnow.Venus.Values", "src\Values\Ocluse.LiquidSnow.Venus.Values.csproj", "{64DF4675-F651-488A-B880-C7CBF46E8C81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocluse.LiquidSnow.Venus.Values", "src\Values\Ocluse.LiquidSnow.Venus.Values.csproj", "{64DF4675-F651-488A-B880-C7CBF46E8C81}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{569F5FC5-394F-496C-A56F-A1202983CBA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +50,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A1D8B03B-E350-4DEC-B268-610F5E5A132A} = {569F5FC5-394F-496C-A56F-A1202983CBA2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9A132A8F-1E8B-40BA-B177-56099D1FCFCB}

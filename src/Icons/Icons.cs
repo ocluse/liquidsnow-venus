@@ -17,6 +17,7 @@ public class Icons
         public static string ChevronLeft => @"<polyline points=""15 18 9 12 15 6""></polyline>";
         public static string ChevronRight => @"<polyline points=""9 18 15 12 9 6""></polyline>";
         public static string Clock => @"<circle cx=""12"" cy=""12"" r=""10""></circle><polyline points=""12 6 12 12 16 14""></polyline>";
+        public static string DollarSign => @"<line x1=""12"" y1=""1"" x2=""12"" y2=""23""></line><path d=""M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6""></path";
         public static string DownloadCloud => @"<polyline points=""8 17 12 21 16 17""></polyline><line x1=""12"" y1=""12"" x2=""12"" y2=""21""></line><path d=""M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29""></path>";
         public static string Edit => @"<path d=""M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7""></path><path d=""M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z""></path>";
         public static string Edit2 => @"<path d=""M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z""></path>";
@@ -54,6 +55,7 @@ public class Icons
         public static string WiFiOff => @"<line x1=""1"" y1=""1"" x2=""23"" y2=""23""></line><path d=""M16.72 11.06A10.94 10.94 0 0 1 19 12.55""></path><path d=""M5 12.55a10.94 10.94 0 0 1 5.17-2.39""></path><path d=""M10.71 5.05A16 16 0 0 1 22.58 9""></path><path d=""M1.42 9a15.91 15.91 0 0 1 4.7-2.88""></path><path d=""M8.53 16.11a6 6 0 0 1 6.95 0""></path><line x1=""12"" y1=""20"" x2=""12.01"" y2=""20""></line>";
         public static string X => @"<line x1=""18"" y1=""6"" x2=""6"" y2=""18""></line><line x1=""6"" y1=""6"" x2=""18"" y2=""18"">";
         public static string XCircle => @"<circle cx=""12"" cy=""12"" r=""10""></circle><line x1=""15"" y1=""9"" x2=""9"" y2=""15""></line><line x1=""9"" y1=""9"" x2=""15"" y2=""15""></line>";
+        public static string MessageSquare => @"<path d=""M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z""></path>";
     }
 
     public static class FeatherCustom
