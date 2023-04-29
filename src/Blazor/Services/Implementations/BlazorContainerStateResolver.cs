@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ocluse.LiquidSnow.Venus.Blazor.Services.Implementations
 {
-    internal class BlazorContainerStateResolver : IBlazorContainerStateResolver
+    public class BlazorContainerStateResolver : IBlazorContainerStateResolver
     {
         public virtual Type Resolve(int containerState)
         {
