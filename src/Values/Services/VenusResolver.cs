@@ -4,12 +4,12 @@ namespace Ocluse.LiquidSnow.Venus.Services
 {
     public class VenusResolver : IVenusResolver
     {
-        public string ResolveAvatarId(string userId)
+        public virtual string ResolveAvatarId(string userId)
         {
             return $"https://cdn.ocluse.com/krystal/avatars/{userId}";
         }
 
-        public string ResolveColor(int color)
+        public virtual string ResolveColor(int color)
         {
 
             string colorStr = color switch
@@ -39,7 +39,7 @@ namespace Ocluse.LiquidSnow.Venus.Services
             return $"var(--color-{colorStr}";
         }
 
-        public int ResolveExceptionToContainerState(Exception exception)
+        public virtual int ResolveExceptionToContainerState(Exception exception)
         {
             if (exception is UnauthorizedAccessException)
             {
@@ -60,7 +60,7 @@ namespace Ocluse.LiquidSnow.Venus.Services
             return ContainerState.Error;
         }
 
-        public string ResolveTextHierarchy(int textHierarchy)
+        public virtual string ResolveTextHierarchy(int textHierarchy)
         {
             return textHierarchy switch
             {
@@ -77,7 +77,7 @@ namespace Ocluse.LiquidSnow.Venus.Services
             };
         }
 
-        public string ResolveTextStyle(int textStyle)
+        public virtual string ResolveTextStyle(int textStyle)
         {
             string style = textStyle switch
             {
