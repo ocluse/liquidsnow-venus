@@ -7,7 +7,7 @@
         {
             var values = value
                 .Split(' ', StringSplitOptions.RemoveEmptyEntries)
-                .Select(int.Parse)
+                .Select(double.Parse)
                 .ToList();
 
             if (values.Count == 1)
@@ -28,7 +28,7 @@
             }
         }
 
-        public static string ToRem(this int value)
+        public static string ToRem(this double value)
         {
             return $"{value / 2}rem";
         }
