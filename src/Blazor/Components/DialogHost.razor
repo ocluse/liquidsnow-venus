@@ -9,10 +9,17 @@
             {
                 <div class="dialog-container" @onclick="OnDismiss">
                     <div class="dialog-content" @onclick:stopPropagation="true">
-                        @if (!string.IsNullOrEmpty(_dialogHeader))
+                        @if (!string.IsNullOrEmpty(_dialogHeader) || _showDialog)
                         {
                             <div class="header-section">
-                                <h3 class="dialog-header">@_dialogHeader</h3>
+                                @if (string.IsNullOrEmpty(_dialogHeader))
+                                {
+                                    <span class="dialog-header"></span>
+                                }
+                                else
+                                {
+                                    <h3 class="dialog-header">@_dialogHeader</h3>
+                                }
                                 @if (_showClose)
                                 {
                                     <IconButton Icon="@Icons.Feather.X" OnClick="()=>CloseDialog()" />
