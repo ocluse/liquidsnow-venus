@@ -37,9 +37,6 @@
     <span class="floating-label @(Value!=null?"pushed":"")">@Header</span>
 </div>
 @code {
-    //[Parameter]
-    //public EventCallback<TItem?> SelectedChanged { get; set; }
-
     [Parameter]
     public IEnumerable<T>? Items { get; set; }
 
@@ -49,7 +46,6 @@
     [CascadingParameter]
     public IDropdownLayout? Layout { get; set; }
 
-    List<string> _items = new() { "Shalom", "Tumaini", "Ebenezer", "Zion" };
     private bool _show;
     private string _showClass = "select-hide";
     private string _dropdownClass = "";

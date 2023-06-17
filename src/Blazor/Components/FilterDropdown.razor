@@ -1,0 +1,82 @@
+@using Ocluse.LiquidSnow.Venus.Blazor.Models;
+@implements IDropdown
+
+<div class="filter-dropdown @_dropdownClass" @onclick="Clicked" @onclick:stopPropagation=true>
+    <div class="select-selected">
+        <FeatherIcon Size="DefaultSize.Size18" Icon="@Icon" />
+        @if (Selected != null)
+        {
+            <TextBlock Class="filter-name">@Selected.Name</TextBlock>
+            <div class="filter-clear" @onclick:stopPropagation=true @onclick="()=>ItemClicked(null)">
+                <FeatherIcon Size="DefaultSize.Size18" Icon="@Icons.Feather.X"/>
+            </div>
+        }
+        else
+        {
+            <TextBlock Color="Color.Secondary">@Placeholder</TextBlock>
+        }
+    </div>
+
+    <div class="select-items @_showClass">
+        @if (Items != null)
+        {
+            @foreach (var item in Items)
+            {
+                <div class="option" @onclick="()=>ItemClicked(item)">
+                    <TextBlock>@item.Name</TextBlock>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public required string Icon { get; set; }
+
+    [Parameter]
+    public FilterOption? Selected { get; set; }
+
+    [Parameter]
+    public EventCallback<FilterOption?> SelectedChanged { get; set; }
+
+    [Parameter]
+    public string? Placeholder { get; set; }
+
+    [Parameter]
+    public IReadOnlyList<FilterOption>? Items { get; set; }
+
+    [Parameter]
+    public RenderFragment<FilterOption>? ItemTemplate { get; set; }
+
+    [Parameter]
+    public IDropdownLayout? Layout { get; set; }
+
+    private bool _show;
+    private string _showClass = "select-hide";
+    private string _dropdownClass = "";
+
+
+    private void ItemClicked(FilterOption? item)
+    {
+        Selected = item;
+        SelectedChanged.InvokeAsync(item);
+    }
+
+    private void Clicked()
+    {
+        SetState(!_show);
+        Layout?.OnDropdownClicked(this);
+    }
+
+    protected void SetState(bool state)
+    {
+        InvokeAsync(() =>
+       {
+           _show = state;
+           _dropdownClass = _show ? "active" : "";
+           _showClass = _show ? "" : "select-hide";
+           StateHasChanged();
+       });
+    }
+}
