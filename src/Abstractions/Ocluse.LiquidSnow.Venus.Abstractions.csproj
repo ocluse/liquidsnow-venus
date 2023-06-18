@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
 	<RootNamespace>Ocluse.LiquidSnow.Venus</RootNamespace>
 	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<Version>0.0.8</Version>
+	<Version>0.1.0</Version>
 	<Authors>Ocluse</Authors>
 	<PackageOutputPath>..\..\build</PackageOutputPath>
 	<Description>Utilities for quickly bootsrapping UI for frameworks supported under Ocluse's Venus design patterns.</Description>

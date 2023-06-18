@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocluse.LiquidSnow.Venus.Val
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{569F5FC5-394F-496C-A56F-A1202983CBA2}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocluse.LiquidSnow.Venus.Icons.Lucide", "src\Icons.Lucide\Ocluse.LiquidSnow.Venus.Icons.Lucide.csproj", "{1FEA1063-A591-4E65-8FCB-16305B3CBC55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{64DF4675-F651-488A-B880-C7CBF46E8C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64DF4675-F651-488A-B880-C7CBF46E8C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64DF4675-F651-488A-B880-C7CBF46E8C81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FEA1063-A591-4E65-8FCB-16305B3CBC55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FEA1063-A591-4E65-8FCB-16305B3CBC55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FEA1063-A591-4E65-8FCB-16305B3CBC55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FEA1063-A591-4E65-8FCB-16305B3CBC55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
