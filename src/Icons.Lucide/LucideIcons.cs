@@ -1,4 +1,4 @@
-﻿namespace Icons.Lucide
+﻿namespace Ocluse.LiquidSnow.Venus
 {
     public static class LucideIcons
     {
