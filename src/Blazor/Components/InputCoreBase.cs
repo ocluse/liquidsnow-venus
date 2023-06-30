@@ -37,7 +37,7 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
 
         protected abstract TValue? GetValue(object? value);
 
-        public async Task<bool> InvokeValidate()
+        public virtual async Task<bool> InvokeValidate()
         {
             if (Validate != null)
             {

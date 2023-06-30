@@ -55,6 +55,9 @@ public class ListView<T> : ControlBase
     [Parameter]
     public EventCallback<CursorPaginationState> CursorPaginationStateChanged { get; set; }
 
+    [Parameter]
+    public string? DisplayMemberPath { get; set; }
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         builder.OpenElement(0, "div");
@@ -136,7 +139,7 @@ public class ListView<T> : ControlBase
                 {
                     builder.OpenComponent<TextBlock>(52);
                     builder.SetKey(item);
-                    builder.AddAttribute(53, nameof(TextBlock.ChildContent), item);
+                    builder.AddAttribute(53, nameof(TextBlock.ChildContent), item.GetDisplayMember(DisplayMemberPath));
                     builder.AddAttribute(54, nameof(Class), itemClass);
                     builder.CloseComponent();
                 }
@@ -270,4 +273,6 @@ public class ListView<T> : ControlBase
         var newOffsetState = OffsetPaginationState.Copy().WithPage(newPage);
         return SetState(newOffsetState, CursorPaginationState);
     }
+
+    
 }
