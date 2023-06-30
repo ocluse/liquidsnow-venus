@@ -24,16 +24,24 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
             builder.AddAttribute(1, "class", GetClass());
             builder.AddAttribute(2, "style", GetStyle());
 
-            builder.AddContent(3, ChildContent);
+            if (string.IsNullOrEmpty(Header))
+            {
+                builder.AddContent(3, ChildContent);
+            }
+            else
+            {
+                builder.AddContent(4, Header);
+            }
+            
 
-            builder.OpenElement(4, "input");
-            builder.AddAttribute(5, "type", "checkbox");
-            builder.AddAttribute(6, "onchange", OnChange);
-            builder.AddAttribute(7, "checked", Value);
+            builder.OpenElement(5, "input");
+            builder.AddAttribute(6, "type", "checkbox");
+            builder.AddAttribute(7, "onchange", OnChange);
+            builder.AddAttribute(8, "checked", Value);
             builder.CloseElement();
 
-            builder.OpenElement(8, "span");
-            builder.AddAttribute(9, "class", "checkmark");
+            builder.OpenElement(9, "span");
+            builder.AddAttribute(10, "class", "checkmark");
             builder.CloseElement();
 
             builder.CloseElement();
