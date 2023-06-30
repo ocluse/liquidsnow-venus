@@ -6,6 +6,19 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Services.Implementations
     internal class DialogService : IDialogService
     {
         private IDialogHost? _host;
+
+        private IDialogHost GetHost()
+        {
+            if (_host == null)
+            {
+                throw new InvalidOperationException("No Dialog Host has been set");
+            }
+            else
+            {
+                return _host;
+            }
+        }
+        
         public void SetHost(IDialogHost host)
         {
             _host = host;
@@ -19,14 +32,17 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Services.Implementations
 
         public Task<DialogResult> ShowDialog(Type dialogType, string? dialogHeader = null, bool allowDismiss = false, bool showClose = true, Dictionary<string, object>? parameters = null)
         {
-            if (_host == null)
-            {
-                throw new InvalidOperationException("No Dialog Host has been set");
-            }
-            else
-            {
-                return _host.ShowDialog(dialogType, dialogHeader, allowDismiss, showClose, parameters);
-            }
+            return GetHost().ShowDialog(dialogType, dialogHeader, allowDismiss, showClose, parameters);
+        }
+
+        public void ShowLoading(string loadingMessage = "Loading...")
+        {
+            GetHost().ShowLoading(loadingMessage);
+        }
+
+        public void HideLoading()
+        {
+            GetHost().HideLoading();
         }
     }
 }
