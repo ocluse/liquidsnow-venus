@@ -1,6 +1,4 @@
-﻿using Ocluse.LiquidSnow.Venus.Blazor.Components;
-
-namespace Ocluse.LiquidSnow.Venus.Blazor
+﻿namespace Ocluse.LiquidSnow.Venus
 {
     public class ValidationSet
     {

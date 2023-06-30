@@ -32,7 +32,6 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
             {
                 builder.AddContent(4, Header);
             }
-            
 
             builder.OpenElement(5, "input");
             builder.AddAttribute(6, "type", "checkbox");
