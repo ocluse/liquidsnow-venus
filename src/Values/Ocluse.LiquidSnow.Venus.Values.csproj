@@ -22,8 +22,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="Ocluse.LiquidSnow.Venus.Blazor"/>
-		<InternalsVisibleTo Include="Ocluse.LiquidSnow.Venus.Razor"/>
+		<InternalsVisibleTo Include="Ocluse.LiquidSnow.Venus.Blazor" />
+		<InternalsVisibleTo Include="Ocluse.LiquidSnow.Venus.Razor" />
 	</ItemGroup>
 	
 	<ItemGroup>

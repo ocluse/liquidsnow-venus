@@ -7,7 +7,7 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
     public class ItemContainer<T> : ControlBase
     {
         [Inject]
-        public IBlazorContainerStateResolver ContainerStateResolver { get; set; } = null!;
+        public IBlazorResolver ContainerStateResolver { get; set; } = null!;
 
         [EditorRequired]
         [Parameter]
@@ -56,7 +56,7 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
             }
             else
             {
-                Type typeToRender = ContainerStateResolver.Resolve(State);
+                Type typeToRender = ContainerStateResolver.ResolveContainerStateToRenderType(State);
                 builder.OpenComponent(1, typeToRender);
                 builder.CloseComponent();
             }

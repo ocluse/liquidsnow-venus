@@ -2,10 +2,10 @@
 {
     public interface IVenusResolver
     {
-        public string ResolveColor(int color);
-        public string ResolveTextStyle(int textStyle);
-        public string ResolveTextHierarchy(int textHierarchy);
-        public string ResolveAvatarId(string userId);
-        public int ResolveExceptionToContainerState(Exception exception);
+        string ResolveColor(int color);
+        string ResolveTextStyle(int textStyle);
+        string ResolveTextHierarchy(int textHierarchy);
+        string ResolveAvatarId(string userId);
+        int ResolveExceptionToContainerState(Exception exception);
     }
 }

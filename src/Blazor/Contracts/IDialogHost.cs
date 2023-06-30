@@ -1,4 +1,4 @@
-﻿namespace Ocluse.LiquidSnow.Venus.Blazor.Components
+﻿namespace Ocluse.LiquidSnow.Venus.Blazor.Contracts
 {
     public interface IDialogHost
     {

@@ -1,6 +1,5 @@
 ﻿namespace Ocluse.LiquidSnow.Venus
 {
-
     public static class Extensions
     {
         public static string ParseThicknessValues(this string value)

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
-using Microsoft.AspNetCore.Components.Web;
 using Ocluse.LiquidSnow.Venus.Blazor.Models;
 using Ocluse.LiquidSnow.Venus.Blazor.Services;
 
@@ -15,7 +14,7 @@ public class ListView<T> : ControlBase
     private object? _nextCursor, _previousCursor;
 
     [Inject]
-    public IBlazorContainerStateResolver ContainerStateResolver { get; set; } = null!;
+    public IBlazorResolver ContainerStateResolver { get; set; } = null!;
 
     [Parameter]
     public RenderFragment? Header { get; set; }
@@ -153,7 +152,7 @@ public class ListView<T> : ControlBase
         }
         else
         {
-            Type typeToRender = ContainerStateResolver.Resolve(State);
+            Type typeToRender = ContainerStateResolver.ResolveContainerStateToRenderType(State);
             builder.OpenComponent(58, typeToRender);
             builder.CloseComponent();
         }

@@ -1,6 +1,6 @@
 ﻿using Ocluse.LiquidSnow.Core.Extensions;
 
-namespace Ocluse.LiquidSnow.Venus.Services
+namespace Ocluse.LiquidSnow.Venus.Services.Implementations
 {
     public class VenusResolver : IVenusResolver
     {
@@ -55,7 +55,7 @@ namespace Ocluse.LiquidSnow.Venus.Services
                 {
                     return ContainerState.Unauthorized;
                 }
-                
+
             }
             return ContainerState.Error;
         }
