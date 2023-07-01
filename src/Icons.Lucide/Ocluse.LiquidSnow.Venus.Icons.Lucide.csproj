@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 		<RootNamespace>Ocluse.LiquidSnow.Venus</RootNamespace>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Version>0.1.2-preview1.0</Version>
+		<Version>0.1.2</Version>
 		<Authors>Ocluse</Authors>
 		<PackageOutputPath>..\..\build</PackageOutputPath>
 		<Description>Additional Icons (form Lucide) for use with Venus libraries.</Description>
