@@ -34,7 +34,7 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
             if (!string.IsNullOrEmpty(ValidationResult.Message))
             {
                 builder.OpenElement(53, "span");
-                builder.AddAttribute(54, ValidationResult.Success ? "success-label" : "error-label");
+                builder.AddAttribute(54, "class", ValidationResult.Success ? "success-label" : "error-label");
                 builder.AddContent(55, ValidationResult.Message);
                 builder.CloseElement();
             }
