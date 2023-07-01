@@ -22,4 +22,12 @@
         Ascending,
         Descending
     }
+
+    public enum SnackbarDuration
+    {
+        Short,
+        Medium,
+        Long,
+        Infinite
+    }
 }

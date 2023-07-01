@@ -8,7 +8,7 @@
         {
             @if (ItemTemplate == null)
             {
-                <TextBlock>@Value</TextBlock>
+                <TextBlock>@Value.GetDisplayMember(DisplayMemberPath)</TextBlock>
             }
             else
             {
@@ -24,7 +24,7 @@
                 <div class="option" @onclick="()=>ItemClicked(item)">
                     @if (ItemTemplate == null)
                     {
-                        <TextBlock>@item</TextBlock>
+                        <TextBlock>@item.GetDisplayMember(DisplayMemberPath)</TextBlock>
                     }
                     else
                     {
@@ -42,6 +42,9 @@
 
     [Parameter]
     public RenderFragment<T>? ItemTemplate { get; set; }
+
+    [Parameter]
+    public string? DisplayMemberPath { get; set; }
 
     [CascadingParameter]
     public IDropdownLayout? Layout { get; set; }

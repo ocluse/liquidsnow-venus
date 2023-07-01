@@ -2,8 +2,6 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Ocluse.LiquidSnow.Venus.Blazor.Services;
 using Ocluse.LiquidSnow.Venus.Blazor.Services.Implementations;
-using Ocluse.LiquidSnow.Venus.Services;
-using System.Runtime.InteropServices;
 
 namespace Ocluse.LiquidSnow.Venus.Blazor
 {
@@ -11,16 +9,17 @@ namespace Ocluse.LiquidSnow.Venus.Blazor
     {
         public static VenusServiceBuilder AddComponents(this VenusServiceBuilder builder)
         {
-            return builder.AddComponents<BlazorContainerStateResolver>();
+            return builder.AddComponents<BlazorResolver>();
         }
 
         public static VenusServiceBuilder AddComponents<T>(this VenusServiceBuilder builder)
-            where T: class, IBlazorContainerStateResolver
+            where T: class, IBlazorResolver
         {
             builder.Services.RemoveAll(typeof(IDialogService));
             builder.Services.AddSingleton<IDialogService, DialogService>();
-            builder.Services.RemoveAll(typeof(IBlazorContainerStateResolver));
-            builder.Services.AddSingleton<IBlazorContainerStateResolver, T>();
+            builder.Services.AddSingleton<ISnackbarService, SnackbarService>();
+            builder.Services.RemoveAll(typeof(IBlazorResolver));
+            builder.Services.AddSingleton<IBlazorResolver, T>();
 
             return builder;
         }

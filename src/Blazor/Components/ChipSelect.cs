@@ -11,6 +11,9 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
         [Parameter]
         public RenderFragment<T>? ItemTemplate { get; set; }
 
+        [Parameter]
+        public string? DisplayMemberPath { get; set; }
+
         protected override T? GetValue(object? value)
         {
             return (T?)value;
@@ -41,7 +44,7 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
                     {
                         builder.AddAttribute(5, "style", "padding: 1rem;");
                         builder.OpenElement(6, "div");
-                        builder.AddContent(7, item.ToString());
+                        builder.AddContent(7, item.GetDisplayMember(DisplayMemberPath));
                         builder.CloseElement();
                     }
                     else

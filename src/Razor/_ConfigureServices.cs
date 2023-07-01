@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Routing;
-using Microsoft.Extensions.DependencyInjection;
-using Ocluse.LiquidSnow.Venus.Services;
-
-namespace Ocluse.LiquidSnow.Venus.Razor
+﻿namespace Ocluse.LiquidSnow.Venus.Razor
 {
     public static class ConfigureServices
     {

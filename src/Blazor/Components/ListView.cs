@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
-using Microsoft.AspNetCore.Components.Web;
 using Ocluse.LiquidSnow.Venus.Blazor.Models;
 using Ocluse.LiquidSnow.Venus.Blazor.Services;
 
@@ -15,7 +14,7 @@ public class ListView<T> : ControlBase
     private object? _nextCursor, _previousCursor;
 
     [Inject]
-    public IBlazorContainerStateResolver ContainerStateResolver { get; set; } = null!;
+    public IBlazorResolver ContainerStateResolver { get; set; } = null!;
 
     [Parameter]
     public RenderFragment? Header { get; set; }
@@ -55,6 +54,9 @@ public class ListView<T> : ControlBase
 
     [Parameter]
     public EventCallback<CursorPaginationState> CursorPaginationStateChanged { get; set; }
+
+    [Parameter]
+    public string? DisplayMemberPath { get; set; }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
@@ -137,7 +139,7 @@ public class ListView<T> : ControlBase
                 {
                     builder.OpenComponent<TextBlock>(52);
                     builder.SetKey(item);
-                    builder.AddAttribute(53, nameof(TextBlock.ChildContent), item);
+                    builder.AddAttribute(53, nameof(TextBlock.ChildContent), item.GetDisplayMember(DisplayMemberPath));
                     builder.AddAttribute(54, nameof(Class), itemClass);
                     builder.CloseComponent();
                 }
@@ -153,7 +155,7 @@ public class ListView<T> : ControlBase
         }
         else
         {
-            Type typeToRender = ContainerStateResolver.Resolve(State);
+            Type typeToRender = ContainerStateResolver.ResolveContainerStateToRenderType(State);
             builder.OpenComponent(58, typeToRender);
             builder.CloseComponent();
         }
@@ -271,4 +273,6 @@ public class ListView<T> : ControlBase
         var newOffsetState = OffsetPaginationState.Copy().WithPage(newPage);
         return SetState(newOffsetState, CursorPaginationState);
     }
+
+    
 }

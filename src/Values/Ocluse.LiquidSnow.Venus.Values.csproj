@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 		<RootNamespace>Ocluse.LiquidSnow.Venus</RootNamespace>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Version>0.1.0</Version>
+		<Version>0.1.2</Version>
 		<Authors>Ocluse</Authors>
 		<PackageOutputPath>..\..\build</PackageOutputPath>
 		<Description>Constants and values for use with Venus libraries.</Description>
@@ -22,8 +22,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="Ocluse.LiquidSnow.Venus.Blazor"/>
-		<InternalsVisibleTo Include="Ocluse.LiquidSnow.Venus.Razor"/>
+		<InternalsVisibleTo Include="Ocluse.LiquidSnow.Venus.Blazor" />
+		<InternalsVisibleTo Include="Ocluse.LiquidSnow.Venus.Razor" />
 	</ItemGroup>
 	
 	<ItemGroup>
@@ -31,6 +31,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
-		<PackageReference Include="Ocluse.LiquidSnow.Core" Version="0.1.2" />
+		<PackageReference Include="Ocluse.LiquidSnow.Core" Version="0.1.5" />
 	</ItemGroup>
 </Project>

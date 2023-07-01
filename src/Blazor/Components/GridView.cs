@@ -7,7 +7,7 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components;
 public class GridView<T> : Grid
 {
     [Inject]
-    public IBlazorContainerStateResolver ContainerStateResolver { get; set; } = null!;
+    public IBlazorResolver ContainerStateResolver { get; set; } = null!;
 
     [Parameter]
     public RenderFragment<T>? ItemTemplate { get; set; }
@@ -24,6 +24,9 @@ public class GridView<T> : Grid
     [Parameter]
     public int State { get; set; }
 
+    [Parameter]
+    public string? DisplayMemberPath { get; set; }
+
     protected override void BuildContent(RenderTreeBuilder builder)
     {
         if (Items != null)
@@ -35,7 +38,7 @@ public class GridView<T> : Grid
                 {
                     builder.OpenComponent<TextBlock>(2);
                     builder.SetKey(item);
-                    builder.AddAttribute(3, nameof(TextBlock.ChildContent), item);
+                    builder.AddAttribute(3, nameof(TextBlock.ChildContent), item.GetDisplayMember(DisplayMemberPath));
                     builder.AddAttribute(4, nameof(TextBlock.Class), itemClass);
                     builder.CloseComponent();
                 }
@@ -51,7 +54,7 @@ public class GridView<T> : Grid
         }
         else
         {
-            Type typeToRender = ContainerStateResolver.Resolve(State);           
+            Type typeToRender = ContainerStateResolver.ResolveContainerStateToRenderType(State);           
             builder.OpenComponent(8, typeToRender);           
             builder.CloseComponent();
         }

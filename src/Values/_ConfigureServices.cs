@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Ocluse.LiquidSnow.Venus.Services;
+using Ocluse.LiquidSnow.Venus.Services.Implementations;
 
 namespace Ocluse.LiquidSnow.Venus
 {

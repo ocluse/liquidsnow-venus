@@ -98,14 +98,16 @@
         _tcsDialog?.SetResult(result);
     }
 
-    public void ShowLoading(string loadingMessage = "Loading...")
+    public void ShowLoading(string loadingMessage)
     {
         _loadingMessage = loadingMessage;
         _showLoading = true;
+        InvokeAsync(StateHasChanged);
     }
 
     public void HideLoading()
     {
         _showLoading = false;
+        InvokeAsync(StateHasChanged);
     }
 }

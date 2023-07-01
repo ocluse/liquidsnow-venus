@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.TagHelpers;
-using Microsoft.AspNetCore.Razor.TagHelpers;
-using Ocluse.LiquidSnow.Core.Extensions;
+﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 using Ocluse.LiquidSnow.Venus.Services;
 
 namespace Ocluse.LiquidSnow.Venus.Razor.TagHelpers
