@@ -49,6 +49,12 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
             builder.AddAttribute(14, "type", GetInputType());
             builder.AddAttribute(15, "onchange", OnChange);
             builder.AddAttribute(16, "value", ParseInputDisplayValue(Value));
+
+            if (Disabled)
+            {
+                builder.AddAttribute(17, "disabled");
+            }
+            
             builder.CloseElement();
         }
 

@@ -26,6 +26,15 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
         [Parameter]
         public Func<TValue?, Task<ValidationResult>>? Validate { get; set; }
 
+        [Parameter]
+        public bool Disabled { get; set; }
+
+        [Parameter]
+        public string? DisabledClass { get; set; }
+
+        [Parameter]
+        public string? HasValueClass { get; set; }
+
         protected async Task OnChange(ChangeEventArgs e)
         {
             Value = GetValue(e.Value);
@@ -61,6 +70,16 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
             if (!ValidationResult.Success)
             {
                 classList.Add("error");
+            }
+
+            if(Disabled)
+            {
+                classList.Add(DisabledClass ?? "disabled");
+            }
+
+            if(Value != null)
+            {
+                classList.Add(HasValueClass ?? "has-value");
             }
         }
 
