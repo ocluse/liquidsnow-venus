@@ -38,7 +38,12 @@
             }
         }
     </div>
-    <span class="header">@Header</span>
+    <span class="header-label">@Header</span>
+
+    @if (ValidationResult.Message != null)
+    {
+        <span class="@GetValidationClass()">@ValidationResult.Message</span>
+    }
 </div>
 @code {
     [Parameter]
@@ -122,8 +127,6 @@
         {
             classList.Add(ClosedClass ?? "closed");
         }
-
-        if(Value!=null)
         classList.Add("dropdown");
     }
 

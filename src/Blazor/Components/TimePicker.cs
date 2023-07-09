@@ -9,7 +9,7 @@
             return string.IsNullOrEmpty(val) ? null : TimeOnly.Parse(val);
         }
 
-        protected override object? ParseInputDisplayValue(TimeOnly? value)
+        protected override object? GetInputDisplayValue(TimeOnly? value)
         {
             return value?.ToString("HH:mm");
         }

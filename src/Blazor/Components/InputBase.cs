@@ -143,6 +143,13 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
 
         }
 
+        protected string GetValidationClass()
+        {
+            return new ClassBuilder()
+                .Add(ValidationResult.Success ? "validation-success" : "validation-error")
+                .Build();
+        }
+
         public void Dispose()
         {
             _debounceTimer?.Dispose();
