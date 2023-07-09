@@ -1,13 +1,26 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Ocluse.LiquidSnow.Venus.Blazor.Components
 {
     public abstract class InputControlBase<T> : InputBase<T>
     {
-        
+        [Parameter]
+        public UpdateTrigger UpdateTrigger { get; set; } = UpdateTrigger.OnChange;
+
         protected override void BuildInputClass(List<string> classList)
         {
             classList.Add("textbox");
+        }
+
+        private string GetUpdateTrigger()
+        {
+            return UpdateTrigger switch
+            {
+                UpdateTrigger.OnChange => "onchange",
+                UpdateTrigger.OnInput => "oninput",
+                _ => throw new NotImplementedException()
+            };
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -47,7 +60,7 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
             builder.OpenElement(10, "input");
             builder.AddAttribute(13, "placeholder", Placeholder ?? " ");
             builder.AddAttribute(14, "type", GetInputType());
-            builder.AddAttribute(15, "onchange", OnChange);
+            builder.AddAttribute(15, GetUpdateTrigger(), OnChange);
             builder.AddAttribute(16, "value", ParseInputDisplayValue(Value));
 
             if (Disabled)
