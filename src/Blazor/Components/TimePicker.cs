@@ -13,5 +13,9 @@
         {
             return value?.ToString("HH:mm");
         }
+        protected override string GetInputType()
+        {
+            return "time";
+        }
     }
 }
