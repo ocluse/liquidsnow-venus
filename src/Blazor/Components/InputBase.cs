@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Timer = System.Timers.Timer;
+
+using Microsoft.AspNetCore.Components;
 
 namespace Ocluse.LiquidSnow.Venus.Blazor.Components
 {
-    public abstract class InputBase<TValue> : ControlBase, IValidatable
+    public abstract class InputBase<TValue> : ControlBase, IValidatable, IDisposable
     {
+        private Timer? _debounceTimer;
 
         [Parameter]
         public TValue? Value { get; set; }
@@ -35,13 +38,65 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
         [Parameter]
         public string? HasValueClass { get; set; }
 
+        [Parameter]
+        public bool EnableDebounce { get; set; }
+
+        [Parameter]
+        public int DebounceInterval { get; set; } = 500;
+
+        [Parameter]
+        public EventCallback UserFinished { get; set; }
+
+        protected override void OnParametersSet()
+        {
+            if (EnableDebounce)
+            {
+                if (_debounceTimer == null)
+                {
+                    _debounceTimer = new Timer(DebounceInterval);
+                    _debounceTimer.Elapsed += (sender, args) =>
+                    {
+                        InvokeAsync(OnUserFinish);
+                    };
+                }
+                else if (_debounceTimer.Interval != DebounceInterval)
+                {
+                    _debounceTimer.Interval = DebounceInterval;
+                }
+            }
+            else if (_debounceTimer != null)
+            {
+                _debounceTimer.Dispose();
+                _debounceTimer = null;
+            }
+        }
+
+        private void ResetTimer()
+        {
+            _debounceTimer?.Stop();
+            _debounceTimer?.Start();
+        }
+
         protected async Task OnChange(ChangeEventArgs e)
         {
             Value = GetValue(e.Value);
 
             await ValueChanged.InvokeAsync(Value);
 
+            if (EnableDebounce)
+            {
+                ResetTimer();
+            }
+            else
+            {
+                await InvokeValidate();
+            }
+        }
+
+        private async void OnUserFinish()
+        {
             await InvokeValidate();
+            await UserFinished.InvokeAsync();
         }
 
         protected abstract TValue? GetValue(object? value);
@@ -64,7 +119,7 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
         protected override sealed void BuildClass(List<string> classList)
         {
             base.BuildClass(classList);
-            
+
             BuildInputClass(classList);
 
             if (!ValidationResult.Success)
@@ -72,12 +127,12 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
                 classList.Add("error");
             }
 
-            if(Disabled)
+            if (Disabled)
             {
                 classList.Add(DisabledClass ?? "disabled");
             }
 
-            if(Value != null)
+            if (Value != null)
             {
                 classList.Add(HasValueClass ?? "has-value");
             }
@@ -86,6 +141,12 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
         protected virtual void BuildInputClass(List<string> classList)
         {
 
+        }
+
+        public void Dispose()
+        {
+            _debounceTimer?.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }
