@@ -27,6 +27,9 @@ public class GridView<T> : Grid
     [Parameter]
     public string? DisplayMemberPath { get; set; }
 
+    [Parameter]
+    public Func<T?, string>? DisplayMemberFunc { get; set; }
+
     protected override void BuildContent(RenderTreeBuilder builder)
     {
         if (Items != null)
@@ -38,8 +41,8 @@ public class GridView<T> : Grid
                 {
                     builder.OpenComponent<TextBlock>(2);
                     builder.SetKey(item);
-                    builder.AddAttribute(3, nameof(TextBlock.ChildContent), item.GetDisplayMember(DisplayMemberPath));
-                    builder.AddAttribute(4, nameof(TextBlock.Class), itemClass);
+                    builder.AddAttribute(3, nameof(TextBlock.ChildContent), item.GetDisplayMember(DisplayMemberFunc, DisplayMemberPath));
+                    builder.AddAttribute(4, nameof(Class), itemClass);
                     builder.CloseComponent();
                 }
                 else

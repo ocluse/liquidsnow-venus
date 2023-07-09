@@ -58,6 +58,9 @@ public class ListView<T> : ControlBase
     [Parameter]
     public string? DisplayMemberPath { get; set; }
 
+    [Parameter]
+    public Func<T?, string>? DisplayMemberFunc { get; set; }
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         builder.OpenElement(0, "div");
@@ -139,7 +142,7 @@ public class ListView<T> : ControlBase
                 {
                     builder.OpenComponent<TextBlock>(52);
                     builder.SetKey(item);
-                    builder.AddAttribute(53, nameof(TextBlock.ChildContent), item.GetDisplayMember(DisplayMemberPath));
+                    builder.AddAttribute(53, nameof(TextBlock.ChildContent), item.GetDisplayMember(DisplayMemberFunc, DisplayMemberPath));
                     builder.AddAttribute(54, nameof(Class), itemClass);
                     builder.CloseComponent();
                 }

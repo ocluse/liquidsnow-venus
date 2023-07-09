@@ -20,7 +20,7 @@ public abstract class ButtonBase : ControlBase
     [Parameter]
     public string? DisabledClass { get; set; }
 
-    public virtual void BuildButtonClass(List<string> classList)
+    protected virtual void BuildButtonClass(List<string> classList)
     {
 
     }
