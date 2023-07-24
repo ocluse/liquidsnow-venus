@@ -83,16 +83,16 @@ public class ListView<T> : ControlBase
                 builder.AddAttribute(6, "class", "list-filtration");
                 builder.OpenComponent<FilterDropdown>(7);
                 builder.AddAttribute(8, nameof(FilterDropdown.Icon), Icons.Feather.Filter);
-                builder.AddAttribute(9, nameof(FilterDropdown.Selected), _selectedFilterOption);
+                builder.AddAttribute(9, nameof(FilterDropdown.Value), _selectedFilterOption);
                 builder.AddAttribute(10, nameof(FilterDropdown.Placeholder), "Filter By");
-                builder.AddAttribute(11, nameof(FilterDropdown.SelectedChanged), FilterChanged);
+                builder.AddAttribute(11, nameof(FilterDropdown.ValueChanged), FilterChanged);
                 builder.CloseComponent();
 
                 builder.OpenComponent<FilterDropdown>(12);
                 builder.AddAttribute(13, nameof(FilterDropdown.Icon), Icons.Feather.List);
-                builder.AddAttribute(14, nameof(FilterDropdown.Selected), _selectedSortOption);
+                builder.AddAttribute(14, nameof(FilterDropdown.Value), _selectedSortOption);
                 builder.AddAttribute(15, nameof(FilterDropdown.Placeholder), "Sort By");
-                builder.AddAttribute(16, nameof(FilterDropdown.SelectedChanged), SorterChanged);
+                builder.AddAttribute(16, nameof(FilterDropdown.ValueChanged), SorterChanged);
                 builder.CloseComponent();
             }
 

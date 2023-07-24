@@ -3,7 +3,7 @@
 @implements IDropdown
 
 <div class="@GetClass()" @onclick="Clicked" @onclick:stopPropagation=!Disabled>
-    <div class="content">
+    <div class="dropdown-content">
         @if (Value != null)
         {
             @if (ItemTemplate == null)
@@ -20,12 +20,12 @@
             <TextBlock Class="placeholder">@Placeholder</TextBlock>
         }
     </div>
-    <div class="items">
+    <div class="dropdown-items">
         @if (Items != null)
         {
             @foreach (var item in Items)
             {
-                <div class="item" @onclick="()=>ItemClicked(item)">
+                <div class="dropdown-item" @onclick="()=>ItemClicked(item)">
                     @if (ItemTemplate == null)
                     {
                         <TextBlock>@item.GetDisplayMember(DisplayMemberFunc, DisplayMemberPath)</TextBlock>
@@ -119,6 +119,8 @@
     {
         base.BuildInputClass(classList);
 
+        classList.Add("dropdown");
+
         if (_isOpen)
         {
             classList.Add(OpenClass ?? "open");
@@ -127,7 +129,6 @@
         {
             classList.Add(ClosedClass ?? "closed");
         }
-        classList.Add("dropdown");
     }
 
     protected override T? GetValue(object? value)
