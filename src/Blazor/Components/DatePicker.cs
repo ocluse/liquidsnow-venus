@@ -15,7 +15,7 @@
             return "date";
         }
 
-        protected override object? ParseInputDisplayValue(DateOnly? value)
+        protected override object? GetInputDisplayValue(DateOnly? value)
         {
             return value?.ToString("yyyy-MM-dd");
         }

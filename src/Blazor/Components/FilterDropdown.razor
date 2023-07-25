@@ -1,28 +1,29 @@
 @using Ocluse.LiquidSnow.Venus.Blazor.Models;
 @implements IDropdown
+@inherits ControlBase
 
-<div class="filter-dropdown @_dropdownClass" @onclick="Clicked" @onclick:stopPropagation=true>
-    <div class="select-selected">
+<div class="@GetClass()" @onclick="Clicked" @onclick:stopPropagation=true>
+    <div class="dropdown-content">
         <FeatherIcon Size="DefaultSize.Size18" Icon="@Icon" />
-        @if (Selected != null)
+        @if (Value != null)
         {
-            <TextBlock Class="filter-name">@Selected.Name</TextBlock>
+            <TextBlock Class="filter-name">@Value.Name</TextBlock>
             <div class="filter-clear" @onclick:stopPropagation=true @onclick="()=>ItemClicked(null)">
                 <FeatherIcon Size="DefaultSize.Size18" Icon="@Icons.Feather.X"/>
             </div>
         }
         else
         {
-            <TextBlock Color="Color.Secondary">@Placeholder</TextBlock>
+            <TextBlock Color="@Venus.Color.Secondary">@Placeholder</TextBlock>
         }
     </div>
 
-    <div class="select-items @_showClass">
+    <div class="dropdown-items">
         @if (Items != null)
         {
             @foreach (var item in Items)
             {
-                <div class="option" @onclick="()=>ItemClicked(item)">
+                <div class="dropdown-item" @onclick="()=>ItemClicked(item)">
                     <TextBlock>@item.Name</TextBlock>
                 </div>
             }
@@ -35,34 +36,53 @@
     public required string Icon { get; set; }
 
     [Parameter]
-    public FilterOption? Selected { get; set; }
+    public FilterOption? Value { get; set; }
 
     [Parameter]
-    public EventCallback<FilterOption?> SelectedChanged { get; set; }
+    public EventCallback<FilterOption?> ValueChanged { get; set; }
 
     [Parameter]
     public string? Placeholder { get; set; }
 
     [Parameter]
-    public IReadOnlyList<FilterOption>? Items { get; set; }
+    public IEnumerable<FilterOption>? Items { get; set; }
 
     [Parameter]
     public IDropdownLayout? Layout { get; set; }
 
-    private bool _show;
-    private string _showClass = "select-hide";
-    private string _dropdownClass = "";
+    private bool _isOpen;
 
-
-    private void ItemClicked(FilterOption? item)
+    protected override void OnInitialized()
     {
-        Selected = item;
-        SelectedChanged.InvokeAsync(item);
+        if (Layout != null)
+        {
+            Layout.Clicked += OnLayoutClicked;
+            Layout.DropdownClicked += OnDropdownClicked;
+        }
+    }
+    
+    private void OnLayoutClicked()
+    {
+        SetState(false);
+    }
+
+    private void OnDropdownClicked(IDropdown dropdown)
+    {
+        if (dropdown != this)
+        {
+            SetState(false);
+        }
+    }
+
+    private Task ItemClicked(FilterOption? item)
+    {
+        Value = item;
+        return ValueChanged.InvokeAsync(item);
     }
 
     private void Clicked()
     {
-        SetState(!_show);
+        SetState(!_isOpen);
         Layout?.OnDropdownClicked(this);
     }
 
@@ -70,10 +90,24 @@
     {
         InvokeAsync(() =>
        {
-           _show = state;
-           _dropdownClass = _show ? "active" : "";
-           _showClass = _show ? "" : "select-hide";
+           _isOpen = state;
            StateHasChanged();
        });
+    }
+
+    protected override void BuildClass(List<string> classList)
+    {
+        base.BuildClass(classList);
+
+        classList.Add("filter-dropdown");
+
+        if(_isOpen)
+        {
+            classList.Add("open");
+        }
+        else
+        {
+            classList.Add("closed");
+        }
     }
 }

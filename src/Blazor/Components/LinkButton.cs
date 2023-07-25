@@ -16,9 +16,9 @@ public class LinkButton : ButtonBase
     public RenderFragment? ChildContent { get; set; }
 
 
-    protected override void BuildClass(List<string> classList)
+    protected override void BuildButtonClass(List<string> classList)
     {
-        base.BuildClass(classList);
+        base.BuildButtonClass(classList);
         classList.Add("link");
         if (Hierarchy == TextHierarchy.Span)
         {

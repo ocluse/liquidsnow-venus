@@ -1,30 +1,34 @@
 @typeparam T
-@inherits InputBase<T> 
+@inherits InputBase<T>
 @implements IDropdown
 
-<div class="dropdown @_dropdownClass"  @onclick="Clicked" @onclick:stopPropagation=true>
-    <div class="select-selected @_selectSelectedClass">
+<div class="@GetClass()" @onclick="Clicked" @onclick:stopPropagation=!Disabled>
+    <div class="dropdown-content">
         @if (Value != null)
         {
             @if (ItemTemplate == null)
             {
-                <TextBlock>@Value.GetDisplayMember(DisplayMemberPath)</TextBlock>
+                <TextBlock>@Value.GetDisplayMember(DisplayMemberFunc, DisplayMemberPath)</TextBlock>
             }
             else
             {
                 @ItemTemplate(Value)
             }
         }
+        else if (Placeholder != null)
+        {
+            <TextBlock Class="placeholder">@Placeholder</TextBlock>
+        }
     </div>
-    <div class="select-items @_showClass">
+    <div class="dropdown-items">
         @if (Items != null)
         {
             @foreach (var item in Items)
             {
-                <div class="option" @onclick="()=>ItemClicked(item)">
+                <div class="dropdown-item" @onclick="()=>ItemClicked(item)">
                     @if (ItemTemplate == null)
                     {
-                        <TextBlock>@item.GetDisplayMember(DisplayMemberPath)</TextBlock>
+                        <TextBlock>@item.GetDisplayMember(DisplayMemberFunc, DisplayMemberPath)</TextBlock>
                     }
                     else
                     {
@@ -34,7 +38,12 @@
             }
         }
     </div>
-    <span class="floating-label @(Value!=null?"pushed":"")">@Header</span>
+    <span class="header-label">@Header</span>
+
+    @if (ValidationResult.Message != null)
+    {
+        <span class="@GetValidationClass()">@ValidationResult.Message</span>
+    }
 </div>
 @code {
     [Parameter]
@@ -46,18 +55,23 @@
     [Parameter]
     public string? DisplayMemberPath { get; set; }
 
+    [Parameter]
+    public Func<T?, string>? DisplayMemberFunc { get; set; }
+
     [CascadingParameter]
     public IDropdownLayout? Layout { get; set; }
 
-    private bool _show;
-    private string _showClass = "select-hide";
-    private string _dropdownClass = "";
-    private string? _selectSelectedClass;
+    [Parameter]
+    public string? OpenClass { get; set; }
 
+    [Parameter]
+    public string? ClosedClass { get; set; }
+
+    private bool _isOpen;
 
     protected override void OnInitialized()
     {
-        if(Layout != null)
+        if (Layout != null)
         {
             Layout.Clicked += OnLayoutClicked;
             Layout.DropdownClicked += OnDropdownClicked;
@@ -85,18 +99,18 @@
 
     private void Clicked()
     {
-        SetState(!_show);
-        Layout?.OnDropdownClicked(this);
+        if (!Disabled)
+        {
+            SetState(!_isOpen);
+            Layout?.OnDropdownClicked(this);
+        }
     }
 
     protected void SetState(bool state)
     {
         InvokeAsync(() =>
        {
-           _show = state;
-           _dropdownClass = _show ? "active" : "";
-           _showClass = _show ? "" : "select-hide";
-           _selectSelectedClass = _show ? "select-arrow-active" : "";
+           _isOpen = state;
            StateHasChanged();
        });
     }
@@ -104,7 +118,17 @@
     protected override void BuildInputClass(List<string> classList)
     {
         base.BuildInputClass(classList);
+
         classList.Add("dropdown");
+
+        if (_isOpen)
+        {
+            classList.Add(OpenClass ?? "open");
+        }
+        else
+        {
+            classList.Add(ClosedClass ?? "closed");
+        }
     }
 
     protected override T? GetValue(object? value)

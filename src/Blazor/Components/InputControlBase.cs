@@ -1,13 +1,28 @@
-﻿using Microsoft.AspNetCore.Components.Rendering;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Ocluse.LiquidSnow.Venus.Blazor.Components
 {
     public abstract class InputControlBase<T> : InputBase<T>
     {
-        
+        [Parameter]
+        public UpdateTrigger UpdateTrigger { get; set; } = UpdateTrigger.OnChange;
+
         protected override void BuildInputClass(List<string> classList)
         {
             classList.Add("textbox");
+        }
+
+        
+
+        private string GetUpdateTrigger()
+        {
+            return UpdateTrigger switch
+            {
+                UpdateTrigger.OnChange => "onchange",
+                UpdateTrigger.OnInput => "oninput",
+                _ => throw new NotImplementedException()
+            };
         }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -25,7 +40,7 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
             if (Header != null)
             {
                 builder.OpenElement(50, "span");
-                builder.AddAttribute(51, "class", "floating-label");
+                builder.AddAttribute(51, "class", "header-label");
                 builder.AddContent(52, Header);
                 builder.CloseElement();
             }
@@ -34,7 +49,7 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
             if (!string.IsNullOrEmpty(ValidationResult.Message))
             {
                 builder.OpenElement(53, "span");
-                builder.AddAttribute(54, "class", ValidationResult.Success ? "success-label" : "error-label");
+                builder.AddAttribute(54, "class", GetValidationClass());
                 builder.AddContent(55, ValidationResult.Message);
                 builder.CloseElement();
             }
@@ -47,8 +62,14 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
             builder.OpenElement(10, "input");
             builder.AddAttribute(13, "placeholder", Placeholder ?? " ");
             builder.AddAttribute(14, "type", GetInputType());
-            builder.AddAttribute(15, "onchange", OnChange);
-            builder.AddAttribute(16, "value", ParseInputDisplayValue(Value));
+            builder.AddAttribute(15, GetUpdateTrigger(), OnChange);
+            builder.AddAttribute(16, "value", GetInputDisplayValue(Value));
+
+            if (Disabled)
+            {
+                builder.AddAttribute(17, "disabled");
+            }
+            
             builder.CloseElement();
         }
 
@@ -57,7 +78,7 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
             return "text";
         }
 
-        protected virtual object? ParseInputDisplayValue(T? value)
+        protected virtual object? GetInputDisplayValue(T? value)
         {
             return value;
         }

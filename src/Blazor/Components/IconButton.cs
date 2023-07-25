@@ -14,9 +14,9 @@ public class IconButton : ButtonBase
     [Parameter]
     public int StrokeWidth { get; set; } = FeatherIcon.STROKE_WIDTH;
 
-    protected override void BuildClass(List<string> classList)
+    protected override void BuildButtonClass(List<string> classList)
     {
-        base.BuildClass(classList);
+        base.BuildButtonClass(classList);
         classList.Add("icon-button");
     }
     protected override void BuildContent(RenderTreeBuilder builder)

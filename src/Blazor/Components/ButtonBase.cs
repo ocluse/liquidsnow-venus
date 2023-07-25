@@ -14,6 +14,29 @@ public abstract class ButtonBase : ControlBase
     [Parameter]
     public string? Target { get; set; }
 
+    [Parameter]
+    public bool Disabled { get; set; }
+
+    [Parameter]
+    public string? DisabledClass { get; set; }
+
+    protected virtual void BuildButtonClass(List<string> classList)
+    {
+
+    }
+
+    protected override sealed void BuildClass(List<string> classList)
+    {
+        base.BuildClass(classList);
+
+        BuildButtonClass(classList);
+
+        if (Disabled)
+        {
+            classList.Add(DisabledClass ?? "disabled");
+        }
+    }
+
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         builder.OpenElement(0, "a");
@@ -21,8 +44,13 @@ public abstract class ButtonBase : ControlBase
         {
             { "class", GetClass() },
             {"style", GetStyle() },
-            {"onclick", OnClick }
+            {"onclick", OnClick },
         };
+
+        if(Disabled)
+        {
+            attributes.Add("disabled", "disabled");
+        }
 
         if (Href == null)
         {

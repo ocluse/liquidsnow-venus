@@ -30,4 +30,10 @@
         Long,
         Infinite
     }
+
+    public enum UpdateTrigger
+    {
+        OnChange,
+        OnInput
+    }
 }
