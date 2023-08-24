@@ -32,6 +32,16 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
             builder.AddAttribute(6, "type", "checkbox");
             builder.AddAttribute(7, "onchange", OnChange);
             builder.AddAttribute(8, "checked", Value);
+
+            if (Disabled)
+            {
+                builder.AddAttribute(9, "disabled");
+            }
+
+            if (ReadOnly)
+            {
+                builder.AddAttribute(10, "readonly");
+            }
             builder.CloseElement();
 
             builder.OpenElement(9, "span");
