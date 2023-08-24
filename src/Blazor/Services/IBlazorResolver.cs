@@ -9,5 +9,7 @@
         int ResolveSnackbarDurationToMilliseconds(SnackbarDuration duration);
         
         int ResolveSnackbarStatusToColor(int status);
+
+        string ResolveSnackbarStatusToClass(int status);
     }
 }

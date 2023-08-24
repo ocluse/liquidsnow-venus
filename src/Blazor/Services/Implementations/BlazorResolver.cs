@@ -53,5 +53,17 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Services.Implementations
                 _ => throw new NotImplementedException()
             };
         }
+
+        public string ResolveSnackbarStatusToClass(int status)
+        {
+            return status switch
+            {
+                MessageStatus.Error => "error",
+                MessageStatus.Information => "information",
+                MessageStatus.Success => "success",
+                MessageStatus.Warning => "warning",
+                _ => throw new NotImplementedException()
+            };
+        }
     }
 }
