@@ -36,6 +36,12 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
         public string? DisabledClass { get; set; }
 
         [Parameter]
+        public bool ReadOnly { get; set; }
+
+        [Parameter]
+        public string? ReadOnlyClass { get; set; }
+
+        [Parameter]
         public string? HasValueClass { get; set; }
 
         [Parameter]
@@ -130,6 +136,11 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
             if (Disabled)
             {
                 classList.Add(DisabledClass ?? "disabled");
+            }
+
+            if (ReadOnly)
+            {
+                classList.Add(ReadOnlyClass ?? "read-only");
             }
 
             if (Value != null)
