@@ -155,7 +155,8 @@ public class ListView<T> : ControlBase
                     builder.OpenElement(56, "div");
                     builder.SetKey(item);
                     builder.AddAttribute(57, "class", itemClass);
-                    builder.AddContent(58, ItemTemplate, item);
+                    builder.AddAttribute(58, "onclick", EventCallback.Factory.Create(this, async () => { await ItemClicked.InvokeAsync(item); }));
+                    builder.AddContent(59, ItemTemplate, item);
                     builder.CloseElement();
                 }
             }

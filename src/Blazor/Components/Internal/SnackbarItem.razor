@@ -4,7 +4,7 @@
 @inject IBlazorResolver Resolver
 
 
-<div class="snackbar-item">
+<div class="snackbar-item @Resolver.ResolveSnackbarStatusToClass(Handle.Status)">
     <FeatherIcon Icon="@Resolver.ResolveSnackbarStatusToIcon(Handle.Status)" Size="DefaultSize.Size18" Color="@Resolver.ResolveSnackbarStatusToColor(Handle.Status)" />
     <div class="snackbar-label">@Handle.Message</div>
     <IconButton Icon="@Icons.Feather.X" OnClick="OnClickClose"></IconButton>
