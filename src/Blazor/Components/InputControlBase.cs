@@ -69,6 +69,11 @@ namespace Ocluse.LiquidSnow.Venus.Blazor.Components
             {
                 builder.AddAttribute(17, "disabled");
             }
+
+            if(ReadOnly)
+            {
+                builder.AddAttribute(18, "readonly");
+            }
             
             builder.CloseElement();
         }

@@ -59,6 +59,9 @@ public class ListView<T> : ControlBase
     public string? DisplayMemberPath { get; set; }
 
     [Parameter]
+    public EventCallback<T> ItemClicked { get; set; }
+
+    [Parameter]
     public Func<T?, string>? DisplayMemberFunc { get; set; }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -144,14 +147,15 @@ public class ListView<T> : ControlBase
                     builder.SetKey(item);
                     builder.AddAttribute(53, nameof(TextBlock.ChildContent), item.GetDisplayMember(DisplayMemberFunc, DisplayMemberPath));
                     builder.AddAttribute(54, nameof(Class), itemClass);
+                    builder.AddAttribute(55, "onclick", EventCallback.Factory.Create(this, async () => { await ItemClicked.InvokeAsync(item); }));
                     builder.CloseComponent();
                 }
                 else
                 {
-                    builder.OpenElement(55, "div");
+                    builder.OpenElement(56, "div");
                     builder.SetKey(item);
-                    builder.AddAttribute(56, "class", itemClass);
-                    builder.AddContent(57, ItemTemplate, item);
+                    builder.AddAttribute(57, "class", itemClass);
+                    builder.AddContent(58, ItemTemplate, item);
                     builder.CloseElement();
                 }
             }
@@ -277,5 +281,8 @@ public class ListView<T> : ControlBase
         return SetState(newOffsetState, CursorPaginationState);
     }
 
-    
+    private async Task OnItemClicked(T item)
+    {
+        await ItemClicked.InvokeAsync(item);
+    }
 }
